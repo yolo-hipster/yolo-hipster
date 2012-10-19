@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+
+.weha-diff-addedsentence {
+	background-color: #99FF99;;
+}
+.weha-diff-deletedsentence {
+	background-color: #FF9999;
+}
+.weha-diff-changedsentence {
+	background-color: #FFFF99;
+}
+.weha-diff-movedsentence {
+	background-color: #9999FF;
+}
+.weha-diff-mergedsentence, weha-diff-splitedsentence {
+	background-color: #FFCC33;
+}
+
+.weha-diff-deleted {
+	color: red;
+	font-weight: bold;
+	text-decoration: none;
+}
+.weha-diff-inserted {
+	color: green;
+	font-weight: bold;
+	text-decoration: none;
+}
+.weha-diff-moved {
+	color: blue;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+table.weha-diff {
+	background-color: white;
+	border: none;
+	width: 98%;
+	border-spacing: 4px;
+	table-layout: fixed;
+}
+
+table.weha-diff td {
+	padding: 0;
+	vertical-align: text-top;
+}
+
+table.weha-diff col.weha-diff-content {
+	width: 50%;
+}
+
+table.weha-diff td div {
+	/* Force-wrap very long lines such as URLs or page-widening char strings.
+	   CSS 3 draft..., but Gecko doesn't support it yet:
+	   https://bugzilla.mozilla.org/show_bug.cgi?id=99457 */
+	word-wrap: break-word;
+	
+	/* As fallback, scrollbars will be added for very wide cells
+	   instead of text overflowing or widening */
+	overflow: auto;
+	
+	/* The above rule breaks on very old versions of Mozilla due
+	   to a bug which collapses the table cells to a single line.
+	   
+	   In Mozilla 1.1 and below with JavaScript enabled, the rule
+	   will be overridden with this by diff.js; wide cell contents
+	   then spill horizontally without widening the rest of the
+	   table: */
+	/* overflow: visible; */
+}
+
+a.first-token {
+	color: inherit; 
+	text-decoration: none;
+}
+
+div.editaction {
+	display: none;
+}

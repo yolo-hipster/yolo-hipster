@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+a.significance-bar-link {
+	text-decoration: none;
+}
+
+div.significance-bar-replace-text {
+	width: 100px;
+	display: inline-block;
+	text-align: center;	
+}
+
+div.significance-bar-outer {
+	width: 100px;
+	height: 8pt;
+	display: inline-block;
+	border-style:solid;
+	border-width: 1px;
+	border-color: #666666;
+	vertical-align: text-top;
+	line-height: 0%;
+}
+
+div.significance-bar-inner {
+	height:100%; 
+	background: blue; 
+	font-size: 4pt;
+}

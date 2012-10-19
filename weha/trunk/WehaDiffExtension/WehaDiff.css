@@ -1,0 +1,132 @@
+@CHARSET "UTF-8";
+
+div.weha-sig-total {
+	margin: 10px 0px;
+	font-size: larger;
+	font-weight: bold;
+}
+
+div.weha-actionlist {
+	display: none;
+}
+
+div.weha-actionname {
+	color: #0033FF;
+	font-weight: bold;
+}
+
+a.weha-diff-anchor {
+	background-color: inherit;
+	color: inherit;
+	font-weight: inherit;
+	text-decoration: inherit;
+}
+a.weha-diff-anchor[href] {
+	text-decoration: underline;
+}
+a.weha-diff-selected, a.weha-diff-selected[href] {
+	background-color: #FFCC66;
+	border: 2px dotted #FF6600;
+}
+
+.weha-diff-sentence-ins {
+	background-color: #99FF99;
+	color: #009900;
+	font-weight: bold;
+}
+.weha-diff-sentence-del {
+	background-color: #FF9999;
+	color: #CC0000;
+	font-weight: bold;
+}
+.weha-diff-sentence-chg {
+	background-color: #FFFF99;
+}
+.weha-diff-sentence-mov {
+	background-color: #9999FF;
+	font-weight: bold;
+}
+.weha-diff-sentence-match {
+	color: #666666;
+}
+
+.weha-diff-del {
+	color: #CC0000;
+	font-weight: bold;
+}
+.weha-diff-ins {
+	color: #009900;
+	font-weight: bold;
+}
+.weha-diff-repl {
+	text-decoration: inherit;
+}
+.weha-diff-mov {
+	color: #0000CC;
+	font-weight: bold;
+	text-decoration: inherit;
+}
+.weha-diff-match {
+	color: #333333;
+}
+
+table.weha-diff {
+	background-color: white;
+	border: none;
+	width: 98%;
+	border-spacing: 4px;
+	table-layout: fixed;
+}
+
+table.weha-diff td {
+	padding: 0;
+	vertical-align: text-top;
+}
+
+table.weha-diff td.weha-diff-editdesc {
+	background-color: #DDDDDD;
+}
+
+table.weha-diff td.weha-diff-para-match {
+	background-color: #DDDDDD;
+}
+
+table.weha-diff td.weha-diff-para-match div {
+	text-align: center;
+}
+
+table.weha-diff td.weha-diff-para-mov {
+	background-color: #9999FF;
+}
+
+table.weha-diff td.weha-diff-para-mov div {
+	font-weight: bold;
+}
+
+table.weha-diff td.weha-diff-para-chg {
+	background-color: #EEEEEE;
+}
+
+table.weha-diff col.weha-diff-content {
+	width: 50%;
+}
+
+table.weha-diff td div {
+	/* Force-wrap very long lines such as URLs or page-widening char strings.
+	   CSS 3 draft..., but Gecko doesn't support it yet:
+	   https://bugzilla.mozilla.org/show_bug.cgi?id=99457 */
+	word-wrap: break-word;
+	
+	/* As fallback, scrollbars will be added for very wide cells
+	   instead of text overflowing or widening */
+	overflow: auto;
+	
+	/* The above rule breaks on very old versions of Mozilla due
+	   to a bug which collapses the table cells to a single line.
+	   
+	   In Mozilla 1.1 and below with JavaScript enabled, the rule
+	   will be overridden with this by diff.js; wide cell contents
+	   then spill horizontally without widening the rest of the
+	   table: */
+	/* overflow: visible; */
+}
