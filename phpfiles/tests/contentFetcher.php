@@ -44,5 +44,10 @@
 		$url = $website."/w/api.php?action=query&prop=revisions&rvstart=basetimestamp&rvuser=".$user."&rvprop=user|ids|timestamp&format=json&redirects&titles=".$article;
 		return file_get_contents($url); 
 	}
+	
+	function getAllSectionRevContent($website, $article){
+		$url = $website."/w/api.php?action=query&prop=revisions&rvstart=basetimestamp&rvsection=revid&format=json&redirects&titles=".$article;
+		return file_get_contents($url); 
+	}
 
 ?>

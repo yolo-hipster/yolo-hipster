@@ -15,6 +15,8 @@
 		$content.= getAllRevId($site, $article);
 		$content.= $skipper;
 		$content.= getUserRevIds($site, $article, "");
+		$content.= $skipper;
+		$content.= getAllSectionRevContent($site, $article);
 		echo $content;
 	}
 	
