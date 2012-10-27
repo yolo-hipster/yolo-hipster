@@ -46,7 +46,7 @@
 	}
 	
 	function getAllSectionRevContent($website, $article){
-		$url = $website."/w/api.php?action=query&prop=revisions&rvstart=basetimestamp&rvsection=revid&list=recentchanges&format=json&redirects&titles=".$article;
+		$url = $website."/w/api.php?action=query&prop=revisions&rvstart=basetimestamp&rvsection=revid&format=json&redirects&titles=".$article;
 		return file_get_contents($url); 
 	}
 	
