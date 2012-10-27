@@ -60,7 +60,7 @@
 	Retourne les sections (dans le tableau content) et leur id
 	*/
 	function getAllSections($website, $article){
-		$url = $website."/w/api.php?action=mobileview&prop=sections&format=json&page=".$article;
+		$url = $website."/w/api.php?action=mobileview&prop=sections&sectionprop=toclevel|level|number|line&format=json&page=".$article;
 		return file_get_contents($url); 
 	}
 
