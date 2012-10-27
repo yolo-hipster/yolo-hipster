@@ -18,7 +18,9 @@
 		$content.= $skipper;
 		$content.= getAllSectionRevContent($site, $article);
 		$content.= $skipper;
-		$content.= getRecentChange($site, $article);
+		$content.= getAllSections($site, $article);
+		$content.= $skipper;
+		$content.= getRecentChanges($site, $article);
 		echo $content;
 	}
 	

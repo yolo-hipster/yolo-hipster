@@ -44,14 +44,23 @@
 		$url = $website."/w/api.php?action=query&prop=revisions&rvstart=basetimestamp&rvuser=".$user."&rvprop=user|ids|timestamp&format=json&redirects&titles=".$article;
 		return file_get_contents($url); 
 	}
-	
+	/*
+		Retourne le contenu des revisions
+	*/
 	function getAllSectionRevContent($website, $article){
 		$url = $website."/w/api.php?action=query&prop=revisions&rvstart=basetimestamp&rvsection=revid&format=json&redirects&titles=".$article;
 		return file_get_contents($url); 
 	}
-	
-	function getRecentChange($website, $article){
+
+	function getRecentChanges($website, $article){
 		$url = $website."/w/api.php?action=query&prop=revisions|user&rvdifftotext&rvcontentformat=text/x-wiki&format=json&redirects&titles=".$article;
+		return file_get_contents($url); 
+	}
+	/*
+	Retourne les sections (dans le tableau content) et leur id
+	*/
+	function getAllSections($website, $article){
+		$url = $website."/w/api.php?action=mobileview&prop=sections&format=json&page=".$article;
 		return file_get_contents($url); 
 	}
 
