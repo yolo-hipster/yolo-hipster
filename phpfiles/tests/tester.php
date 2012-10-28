@@ -13,7 +13,7 @@
 		
 		$content = "Tous les utilisateurs";
 		$content.= $skipper;
-		echoJNuserTag(getAllUsers($site, $article));
+		$content.= getAllUsers($site, $article);
 		$content.= $skipper;
 		$content.= "Tous id de revisions";
 		$content.= $skipper;
