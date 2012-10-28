@@ -47,8 +47,8 @@
 	/*
 		Retourne le contenu des revisions
 	*/
-	function getAllSectionRevContent($website, $article){
-		$url = $website."/w/api.php?action=query&prop=revisions&rvstart=basetimestamp&rvsection=revid&format=json&redirects&titles=".$article;
+	function getAllSectionRevContent($website, $article, $section){
+		$url = $website."/w/api.php?action=query&prop=revisions&rvstart=basetimestamp&rvsection=".$section."&format=json&redirects&titles=".$article;
 		return file_get_contents($url); 
 	}
 
@@ -68,6 +68,23 @@
 		$url = $website."/w/api.php?action=query&prop=revisions&revids=".$revision_id."&rvprop=user&format=json";
 		return file_get_contents($url); 
 	}
+	
+	/*
+	Text brute du section (dans ce cas, la section ayant le id 2)
+	*/
+	function getSpecificSectionContent($website, $article, $section){
+		$url = $website."/w/index.php?action=raw&title=".$article."&section=".$section;
+		return file_get_contents($url); 
+	}
+	
+	/*
+	Differences de versions par wikipedia (important impact visuel)
+	*/
+	function getDiff($website, $article, $rev){
+		$url = $website."/w/index.php?title=".$article."&diff=cur&oldid=".$rev;
+		return file_get_contents($url); 
+	}
+	
 	
 
 ?>

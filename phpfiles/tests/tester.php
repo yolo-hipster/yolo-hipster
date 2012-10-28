@@ -25,7 +25,7 @@
 		$content.= $skipper;
 		$content.= "Contenu des revisions de section";
 		$content.= $skipper;
-		$content.= getAllSectionRevContent($site, $article);
+		$content.= getAllSectionRevContent($site, $article, 2);
 		$content.= $skipper;
 		$content.= "Tous les sections";
 		$content.= $skipper;
@@ -35,9 +35,9 @@
 		$content.= $skipper;
 		$content.= getRevisionUser($site, $article,500712829);
 		$content.= $skipper;
-		$content.= "Les derniers changements";
+		$content.= "Le contenu d'une section";
 		$content.= $skipper;
-		$content.= getRecentChanges($site, $article);
+		$content.= getSpecificSectionContent($site, $article,5);
 		echo $content;
 	}
 	
