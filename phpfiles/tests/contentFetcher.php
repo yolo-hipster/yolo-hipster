@@ -53,7 +53,7 @@
 	}
 
 	function getRecentChanges($website, $article){
-		$url = $website."/w/api.php?action=query&prop=revisions|user&rvdifftotext&rvcontentformat=text/x-wiki&format=json&redirects&titles=".$article;
+		$url = $website."/w/api.php?action=query&prop=revisions&rvprop=user&rvdifftotext&rvcontentformat=text/x-wiki&format=json&redirects&titles=".$article;
 		return file_get_contents($url); 
 	}
 	/*
@@ -63,5 +63,11 @@
 		$url = $website."/w/api.php?action=mobileview&prop=sections&sectionprop=toclevel|level|number|line&format=json&page=".$article;
 		return file_get_contents($url); 
 	}
+	
+	function getRevisionUser($website, $article, $revision_id){
+		$url = $website."/w/api.php?action=query&prop=revisions&revids=".$revision_id."&rvprop=user&format=json";
+		return file_get_contents($url); 
+	}
+	
 
 ?>
