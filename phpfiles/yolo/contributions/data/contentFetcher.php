@@ -1,6 +1,5 @@
 ﻿<?php
 	/*
-		CE FICHIER A ETE BOUGER VERS yolo/contributions/data/contentFetcher.php
 		Série de tests de requêtes (hardcoded)
 	*/
 
