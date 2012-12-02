@@ -1,1 +1,1 @@
-Contient les fichiers classes/objets
+Ensemble des classes 

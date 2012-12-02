@@ -1,1 +1,1 @@
-Contient les fichiers assurant le lancement du programme
+Fichiers permettant le roulement du programme
