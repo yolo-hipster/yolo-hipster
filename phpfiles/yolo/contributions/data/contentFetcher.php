@@ -26,7 +26,7 @@
 		Désagréable à voir
 	*/
 	function getAllRevContent($website, $article){
-		$url = $website."/w/api.php?action=query&prop=revisions&rvstart=basetimestamp&rvprop=ids|content&format=json&redirects&titles=".$article;
+		$url = $website."/w/api.php?action=query&prop=revisions&rvprop=ids|content&rvdir=newer&format=json&redirects&titles=".$article;
 		return file_get_contents($url); 
 	}
 	
