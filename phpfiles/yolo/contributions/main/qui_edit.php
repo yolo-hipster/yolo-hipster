@@ -1,5 +1,6 @@
 <?php
 	/*
+		CE FICHIER A ETE BOUGE VERS yolo/contributions/main/qui_edit.php
 		Effectue une série de tests.
 	*/
 	
