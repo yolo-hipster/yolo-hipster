@@ -53,6 +53,14 @@
 		}
 		
 		/*
+			Comportement etrange
+		*/
+		public static function getSectionRevisions(ArticleWiki $wiki, $section){
+			$url = $wiki->getWiki()."/w/api.php?action=query&prop=revisions&rvsection=".$section."&rvlimit=10&format=json&redirects&titles=".$wiki->getArticle();
+			return file_get_contents($url); 
+		}
+		
+		/*
 			Retourne les sections (du tableau contenu) et leur id
 		*/
 		public static function getSections(ArticleWiki $wiki){
