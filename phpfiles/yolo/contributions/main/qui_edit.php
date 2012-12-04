@@ -8,14 +8,13 @@
 include("../classes/traitementRequetes/requeteur.class.php");
 ini_set('user_agent', 'ProjetWiki (https://github.com/yolo-hipster/yolo-hipster; rlamour2@yahoo.ca)'); //Requis pour �viter une erreur 403
 
-
-
 function afficherUtilisateurs() {
- $url = $_GET['url'];
+    $url = $_GET['url'];
+    $article = $_GET['article'];
 
     $wikiobject = new ArticleWiki();
-    $wikiobject->createByURL($url);
-    
+    $wikiobject->createByWikiArticle($url, $article);
+
     $requeteur = new Requeteur();
 
     $content = $requeteur->getUsers($wikiobject);
