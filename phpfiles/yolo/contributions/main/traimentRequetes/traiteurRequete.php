@@ -12,7 +12,7 @@
 	
 	//Un simple exemple
 	try {
-		RequestExecutor::printArray(RequestExecutor::executeRequest("toutes_revisions"));
+		RequestExecutor::printArray(RequestExecutor::executeRequest("tous_auteurs"));
 	} catch (Exception $e){
 		echo "Erreur de dans le traitement";
 	}
