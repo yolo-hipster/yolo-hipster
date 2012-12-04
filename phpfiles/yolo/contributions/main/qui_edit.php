@@ -1,44 +1,44 @@
 <?php
-	/*
-		CE FICHIER A ETE BOUGE VERS yolo/contributions/main/qui_edit.php
-		Effectue une série de tests.
-	*/
-	
-	include("../classes/traitementRequetes/requeteur.class.php");
-	ini_set('user_agent', 'ProjetWiki (https://github.com/yolo-hipster/yolo-hipster; rlamour2@yahoo.ca)'); //Requis pour éviter une erreur 403
-	
-	$site = "http://fr.wikipedia.org";
-	$article = "Baobab%20africain";
-	$skipper = "<br>";
-	
-	function afficherUtilisateurs(){
-		global $site;
-		global $article;
-		global $skipper;
-		
-		$content = getUsers($site);
-		$trouveMoi = "\"user\":";
-		$nb = substr_count($content, $trouveMoi);
-		$tableauUser = array();
-		
-		for($i=0; $i<$nb; $i++){
-			$position = strpos($content, $trouveMoi);
-			$content = substr($content, $position+8);
-			$tailleTrouve = strpos($content, "\"");
-			$user = substr($content,0, $tailleTrouve);
-			$tableauUser[$i] = $user;
-			/*print $user;
-			print $skipper;*/
-		}
-		return $tableauUser;
-	}
 
-	$unTableau = afficherUtilisateurs();
-	
-	foreach($unTableau as $elem){
-		print $elem;
-		print $skipper;
-	}
-	
-	
+/*
+  CE FICHIER A ETE BOUGE VERS yolo/contributions/main/qui_edit.php
+  Effectue une sï¿½rie de tests.
+ */
+
+include("../classes/traitementRequetes/requeteur.class.php");
+ini_set('user_agent', 'ProjetWiki (https://github.com/yolo-hipster/yolo-hipster; rlamour2@yahoo.ca)'); //Requis pour ï¿½viter une erreur 403
+
+
+
+function afficherUtilisateurs() {
+ $url = $_GET['url'];
+
+    $wikiobject = new ArticleWiki();
+    $wikiobject->createByURL($url);
+    
+    $requeteur = new Requeteur();
+
+    $content = $requeteur->getUsers($wikiobject);
+    $trouveMoi = "\"user\":";
+    $nb = substr_count($content, $trouveMoi);
+    $tableauUser = array();
+
+    for ($i = 0; $i < $nb; $i++) {
+        $position = strpos($content, $trouveMoi);
+        $content = substr($content, $position + 8);
+        $tailleTrouve = strpos($content, "\"");
+        $user = substr($content, 0, $tailleTrouve);
+        $tableauUser[$i] = $user;
+        /* print $user;
+          print $skipper; */
+    }
+    return $tableauUser;
+}
+
+$unTableau = afficherUtilisateurs();
+
+foreach ($unTableau as $elem) {
+    print $elem;
+    print $skipper;
+}
 ?>

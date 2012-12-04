@@ -15,7 +15,7 @@
 		/*
 			Creation par un Wiki (tel que: en.wikipedia.org) et du nom de l'article 
 		*/
-		public static function createByWikiArticle($wiki, $article){
+		public function createByWikiArticle($wiki, $article){
 			$object = new self();
 			$object->setWiki($wiki);
 			$object->setArticle($article);
