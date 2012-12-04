@@ -34,7 +34,7 @@ Raphael.fn.pieChart = function (cx, cy, r, values, labels, stroke) {
         p.mouseover(function () {
             p.stop().animate({
                 transform: "s1.1 1.1 " + cx + " " + cy
-                }, ms, "easein");
+            }, ms, "easein");
             txt.stop().animate({
                 opacity: 1
             }, ms, "easein");
@@ -70,10 +70,10 @@ $(function () {
     $("table").hide();
     Raphael("holder", 620, 400).pieChart(310, 175, 130, values, labels, "#fff");
     $('#envoyer').click(function(){
-        $("#question").fadeOut(500, function(){
-             $("#result").fadeIn(500);
+        
+        $("#result").fadeIn(500);
             
-        });
+    
        
     
     });
