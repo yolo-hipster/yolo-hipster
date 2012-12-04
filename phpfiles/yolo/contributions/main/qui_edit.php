@@ -4,7 +4,7 @@
 		Effectue une série de tests.
 	*/
 	
-	include("contentFetcher.php");
+	include("../classes/traitementRequetes/requeteur.class.php");
 	ini_set('user_agent', 'ProjetWiki (https://github.com/yolo-hipster/yolo-hipster; rlamour2@yahoo.ca)'); //Requis pour éviter une erreur 403
 	
 	$site = "http://fr.wikipedia.org";
@@ -16,7 +16,7 @@
 		global $article;
 		global $skipper;
 		
-		$content = getAllUsers($site, $article);
+		$content = getUsers($site);
 		$trouveMoi = "\"user\":";
 		$nb = substr_count($content, $trouveMoi);
 		$tableauUser = array();
