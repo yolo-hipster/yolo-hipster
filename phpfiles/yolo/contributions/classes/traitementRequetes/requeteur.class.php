@@ -16,6 +16,20 @@
 		}
 		
 		/*
+		 * 	Retourne tous les revisions d'un article en ordre chronologique 
+		 * croissant sous forme de tableau.
+		 */
+		public static function getAllRevisions(ArticleWiki $wiki){
+			$url = $wiki->getWiki()."/w/api.php?action=query&prop=revisions&rvprop=ids|content&rvlimit=500&format=json&redirects&rvdir=newer&titles=".$wiki->getArticle();
+			$jsonFile = file_get_contents($url);
+			$jsonObjs = json_decode($jsonFile, true);
+			
+			$revisions = $jsonObjs["query"]["pages"];
+			
+			return $revisions;
+		}
+		
+		/*
 			Retourne les auteurs d'un article
 			
 			limite: 500

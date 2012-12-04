@@ -1,5 +1,5 @@
 ﻿<?php
-
+	include_once("MWJsonDecoder.class.php");
 	class ArticleWiki {
 	/*
 		Contient les informations sur l'article à étudier
