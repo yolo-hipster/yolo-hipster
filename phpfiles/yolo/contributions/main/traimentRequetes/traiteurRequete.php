@@ -27,7 +27,8 @@
 			Retourne un array de donnees selon la requete.
 		*/
 		public static function executeRequest($requete){
-			$wiki = ArticleWiki::createByURL("en.wikipedia.org/wiki/Celine%20Dion"); //Simple exemple
+                    
+			$wiki = ArticleWiki::createByURL($_GET['url']); //Simple exemple
 			$array;
 			
 			try {
