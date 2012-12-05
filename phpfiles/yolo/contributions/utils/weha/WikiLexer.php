@@ -11,13 +11,13 @@ class WikiLexer {
 	private $editionId;
 	
 	public function __construct($text) {
-		echo "1";
+		//echo "1";
 		$reader = new Java('java.io.StringReader', $text);
-		echo "2";
+		//echo "2";
 		$scanner = new Java('mo.umac.wikianalysis.lexer.MediawikiScanner', $reader);
-		echo "3";
+		//echo "3";
 		$scanner->tokens = new Java('java.util.ArrayList');
-		echo "4";
+		//echo "4";
 		$scanner->parse();
 		$this->tokens = $scanner->getTokens();
 	}
