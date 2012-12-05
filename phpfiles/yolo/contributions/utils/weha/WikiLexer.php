@@ -7,6 +7,8 @@ class WikiLexer {
 	
 	private $tokens;
 	private $wikiTokens;
+	private $userName;
+	private $editionId;
 	
 	public function __construct($text) {
 		echo "1";
@@ -20,7 +22,7 @@ class WikiLexer {
 		$this->tokens = $scanner->getTokens();
 	}
 	
-	public function getWikiTokens() {
+	public function getWikiTokens(&$userName = null, &$editionId = null) {
 		$this->wikiTokens = array();
 		
 		$tokensArray = java_values($this->tokens);
@@ -28,7 +30,9 @@ class WikiLexer {
 			$this->wikiTokens[] = new WikiToken(
 				java_values($tok->kind), 
 				java_values($tok->image), 
-				java_values($tok->displayString) );
+				java_values($tok->displayString),
+				$userName,
+				$editionId );
 		}
 		
 		return $this->wikiTokens;

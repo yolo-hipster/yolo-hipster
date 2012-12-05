@@ -4,6 +4,8 @@ class WikiToken {
 	public $kind;
 	public $image;
 	public $displayString;
+	public $userName;
+	public $editionId;
 	
 	/**
 	 * Constructs a new token for the specified Image and Kind.
@@ -11,9 +13,11 @@ class WikiToken {
 	 * @param image
 	 * @param $displayString
 	 */
-	public function __construct($kind, $image, $displayString = null) {
+	public function __construct($kind, $image, $displayString = null, $userName = null, $revisionId = null) {
 		$this->kind = $kind;
 		$this->image = $image;
+		$this->userName = $userName;
+		$this->editionId = $revisionId;
 		
 		if ($displayString === null)
 			$this->displayString = $image;
