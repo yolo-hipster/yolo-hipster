@@ -29,14 +29,10 @@ class SentenceDiff {
 	
 	const threshold = 0.333;
 	
-	public function __construct($oldText, $newText)
+	public function __construct($oldTokens, $newTokens)
 	{
-		$scanner = new WikiLexer($oldText);
-		$this->oldTokens = $scanner->getWikiTokens();
-		
-
-		$scanner = new WikiLexer($newText);
-		$this->newTokens = $scanner->getWikiTokens();
+		$this->oldTokens = $oldTokens;
+		$this->newTokens = $newTokens;
 	
 		$this->oldSentences = array();
 		$this->newSentences = array();
