@@ -61,17 +61,25 @@ Raphael.fn.pieChart = function (cx, cy, r, values, labels, stroke) {
 };
 
 $(function () {
-    var values = [],
+    
+    
+    $('#envoyer').click(function(){
+        
+        $.ajax({
+            url: "quiEdit.php"
+        }).done(function ( data ) {
+            $("#content").html(data);
+            var values = [],
     labels = [];
     $("tr").each(function () {
         values.push(parseInt($("td", this).text(), 10));
         labels.push($("th", this).text());
     });
     $("table").hide();
-    Raphael("holder", 620, 400).pieChart(310, 175, 130, values, labels, "#fff");
-    $('#envoyer').click(function(){
+            Raphael("holder", 620, 400).pieChart(310, 175, 130, values, labels, "#fff");
+            $("#result").fadeIn(500);
+        });
         
-        $("#result").fadeIn(500);
             
     
        

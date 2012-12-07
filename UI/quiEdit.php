@@ -1,4 +1,7 @@
 <?php
+
+
+
 $result = '<div class="contributeurs">
                 <h2>Nom</h2>
             <ol>
