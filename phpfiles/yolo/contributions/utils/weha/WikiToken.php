@@ -6,6 +6,7 @@ class WikiToken {
 	public $displayString;
 	public $userName;
 	public $editionId;
+	public $tokenHash;
 	
 	/**
 	 * Constructs a new token for the specified Image and Kind.
@@ -23,6 +24,8 @@ class WikiToken {
 			$this->displayString = $image;
 		else
 			$this->displayString = $displayString;
+		
+		$this->tokenHash = uniqid();
 	}
 	
 	public function createWikiToken($token, $displayString = null) {
@@ -63,6 +66,10 @@ class WikiToken {
 		if ($this->kind != $other->kind)
 			return false;
 		return true;
+	}
+	
+	public function getHash(){
+		return $this->tokenHash();
 	}
 	
 	

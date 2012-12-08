@@ -11,13 +11,13 @@ class WikiLexer {
 	private $editionId;
 	
 	public function __construct($text) {
-		//echo "1";
+		
 		$reader = new Java('java.io.StringReader', $text);
-		//echo "2";
+		
 		$scanner = new Java('mo.umac.wikianalysis.lexer.MediawikiScanner', $reader);
-		//echo "3";
+		
 		$scanner->tokens = new Java('java.util.ArrayList');
-		//echo "4";
+		
 		$scanner->parse();
 		$this->tokens = $scanner->getTokens();
 	}
@@ -27,12 +27,13 @@ class WikiLexer {
 		
 		$tokensArray = java_values($this->tokens);
 		foreach($tokensArray as $tok) {
-			$this->wikiTokens[] = new WikiToken(
+			$currentToken = new WikiToken(
 				java_values($tok->kind), 
 				java_values($tok->image), 
 				java_values($tok->displayString),
 				$userName,
 				$editionId );
+			$this->wikiTokens[$currentToken->getHash()] = $currentToken;
 		}
 		
 		return $this->wikiTokens;
