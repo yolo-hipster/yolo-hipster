@@ -6,7 +6,7 @@ class WikiToken {
 	public $displayString;
 	public $userName;
 	public $editionId;
-	public $tokenHash;
+	private $tokenHash;
 	
 	/**
 	 * Constructs a new token for the specified Image and Kind.
@@ -69,7 +69,7 @@ class WikiToken {
 	}
 	
 	public function getHash(){
-		return $this->tokenHash();
+		return $this->tokenHash;
 	}
 	
 	

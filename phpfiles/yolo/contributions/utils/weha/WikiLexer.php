@@ -33,7 +33,7 @@ class WikiLexer {
 				java_values($tok->displayString),
 				$userName,
 				$editionId );
-			$this->wikiTokens[$currentToken->getHash()] = $currentToken;
+			$this->wikiTokens[] = $currentToken;
 		}
 		
 		return $this->wikiTokens;
