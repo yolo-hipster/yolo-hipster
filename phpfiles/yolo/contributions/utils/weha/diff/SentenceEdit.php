@@ -16,7 +16,7 @@ abstract class SentenceEdit {
 	}
 	
 	public function getOldLength() {
-		return $this->oldSentence->length;
+		return count($this->oldSentence);
 	}
 	
 	public function getNewStartPos() {
@@ -28,7 +28,7 @@ abstract class SentenceEdit {
 	}
 	
 	public function getNewLength() {
-		return $this->newSentence->length;
+		return count($this->newSentence);
 	}
 	
 	public function getMatchingRate() {
