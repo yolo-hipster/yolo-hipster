@@ -25,7 +25,7 @@
 				return null;
 			}
 			
-			$url = $wiki->getWiki()."/w/api.php?action=query&prop=revisions&rvprop=ids|content&rvlimit=500&format=json&redirects&rvdir=newer&titles=".$wiki->getArticle();
+			$url = $wiki->getWiki()."/w/api.php?action=query&prop=revisions&rvprop=ids|content|user&rvlimit=500&format=json&redirects&rvdir=newer&titles=".$wiki->getArticle();
 			$jsonFile = file_get_contents($url);
 			$jsonObjs = json_decode($jsonFile, true);
 			
