@@ -47,17 +47,17 @@ function afficherUtilisateurs() {
 $unTableau = afficherUtilisateurs();
 $nb = count($unTableau[0]);
 
-print '{ "Edits": [';
+echo '{';
 for ($i = 0; $i < $nb; $i++) {
 
-    print "{";
-    print '"Id" :' . $nb . ",";
-    print '"UserName":"' . $unTableau[0][$i] . '",';
-    print '"Number":' . $unTableau[1][$i];
-    print "}";
+    echo "{";
+    echo '"Id" :' . $nb . ",";
+    echo '"UserName":"' . $unTableau[0][$i] . '",';
+    echo '"Number":' . $unTableau[1][$i];
+    echo "}";
     if ($i < $nb - 1) {
-        print ",";
+        echo ",";
     }
 }
-print "]}";
+echo "}";
 ?>

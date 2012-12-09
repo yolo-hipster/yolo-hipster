@@ -2,10 +2,20 @@
 
 
 
+
+$jsonurl = "http://localhost/yolo-hipster/phpfiles/yolo/contributions/main/qui_edit.php?url=fr.wikipedia.org&article=Tokyo_ANA_Hotel";
+$json = file_get_contents($jsonurl, false);
+
+$obj = json_decode($json);
+
+var_dump($json);
+
 $result = '<div class="contributeurs">
-                <h2>Nom</h2>
-            <ol>
-                <li>sophiedeziel : <span>10</span></li>
+                <h2>' . $json[0] . '</h2>
+            <ol>';
+
+
+$result .= '           <li>Sophiedeziel : <span>10</span></li>
                 <li>ialexca : <span>9</span></li>
                 <li>prega : <span>7</span></li>
                 <li>rlamour : <span>6</span></li>
