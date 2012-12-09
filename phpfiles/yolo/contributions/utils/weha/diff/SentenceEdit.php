@@ -35,5 +35,13 @@ abstract class SentenceEdit {
 		return $this->matchingRate;
 	}
 	
+	public function getOldPos(){
+		return $this->oldPos;
+	}
+	
+	public function getNewPos(){
+		return $this->newPos;
+	}
+	
 	public abstract function descString();
 }
