@@ -1,5 +1,4 @@
 <?php
-include_once( dirname(__FILE__) . '/../WikiLexer.php');
 include_once('Sentence.php');
 include_once('SentenceDel.php');
 include_once('SentenceIns.php');
