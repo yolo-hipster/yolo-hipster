@@ -13,13 +13,10 @@ class ActionCategorizer {
 	private $sdiff;
 	private $actions;
 	
-	public function __construct($oldStr, $newStr) {
+	public function __construct(array $oldTokens, array $newTokens) {
+		$this->oldTokens = $oldTokens; 
 		
-		$scanner = new WikiLexer($oldStr);
-		$this->oldTokens = $scanner->getWikiTokens();
-		
-		$scanner = new WikiLexer($newStr);
-		$this->newTokens = $scanner->getWikiTokens();
+		$this->newTokens = $newTokens;
 		
 		$this->sdiff = new SentenceDiff($this->oldTokens, $this->newTokens);
 		
@@ -84,11 +81,11 @@ class ActionCategorizer {
 	}
 	
 	public function getTokenOld() {
-		return $this->OldTokens;
+		return $this->oldTokens;
 	}
 	
 	public function getTokenNew() {
-		return $this->NewTokens;
+		return $this->newTokens;
 	}
 	
 	public function getSentenceEdits() {
