@@ -3,7 +3,7 @@
 		Effectue une série de tests.
 	*/
 	
-	include("contentFetcher.php");
+	include("../classes/traitementRequetes/contentFetcher.php");
 	ini_set('user_agent', 'ProjetWiki (https://github.com/yolo-hipster/yolo-hipster; rlamour2@yahoo.ca)'); //Requis pour éviter une erreur 403
 	
 	function trouvePosition($contenu, $recherche){
@@ -46,8 +46,8 @@
 
 	//afficherUtilisateurs();
 	
-	include("Categorize.php");
-	include("MWJsonDecoder.class.php");
+	include("../utils/weha/categorizer/Categorize.php");
+	include("../classes/traitementRequetes/MWJsonDecoder.class.php");
 	
 	function test(){
 		$site = "http://fr.wikipedia.org";
@@ -56,13 +56,11 @@
 		$content = getAllRevId($site, $article);
 		
 		$cat = new Categorize();
-		$jj = new MWJsonDecoder();
-		
 		
 		//var_dump($content);
-		$unTableau = $jj->jsonDecodeRevision($content);
+		$unTableau = MWJsonDecoder::getRevisionArray($content);
 	
-	print $unTableau['query']['pages'][$jj->getPageId($content)]['revisions'];
+	//print $unTableau['query']['pages'][$jj->getPageId($content)]['revisions'];
 		//foreach($unTableau as $elem){
 			//print $elem;
 			//print $skipper;
