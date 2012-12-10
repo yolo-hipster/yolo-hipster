@@ -1,66 +1,55 @@
 <?php 
 	include_once("../classes/traitementRequetes/requeteur.class.php");
 	include_once("../utils/weha/categorizer/ActionCategorizerQuiEditQui.php");
-	include_once("../utils/weha/WikiDiffFormatterQuiEditQui.php");
 	ini_set('user_agent', 'ProjetWiki (https://github.com/yolo-hipster/yolo-hipster; rlamour2@yahoo.ca)');
 	
-	QuiEditQui::QuiEditerTexteDeQui("en.wikipedia.org/wiki/Alfred_Poupart");
 	
 	class QuiEditQui{
 	
+		/*
+		 * A function that return a JSON string contains 
+		 * Who is editing who's text. See Yolo-Hipster Wiki for more informations.
+		 * 
+		 * Uses Weha/diff/SentenceIns to detect a new Sentence.
+		 * Uses Weha/diff/SentenceDel to detect a sentence that has been deleted.
+		 * 
+		 * 
+		 */
 		static function QuiEditerTexteDeQui($url)
 		{
+			//Get revisions from the article
 			$wikipage = ArticleWiki::createByURL($url);
 			$wikiRevs = Requeteur::getAllRevisions($wikipage);
-			$QuiEditQui = Array();
+
+			//Init class that manage the output
 			$organizer = new QuiEditQuiOutPutOrganizer();
-			//var_dump($wikiRevs);
-			//var_dump(count($wikiRevs));
+			
 			if(!empty($wikiRevs))
 			{
-				$i = 1;
+				//Create the first iteration. (Insertion only)
+				$EditId = 1;
 				$lexer = new WikiLexer($wikiRevs[0]["*"]);
-				$newText = $lexer->getWikiTokens($wikiRevs[0]["user"],$i);
-				$oldText = Array();
+				$newText = $lexer->getWikiTokens($wikiRevs[0]["user"],$EditId);
+				$oldText = Array(); //Empty first text
 				$ac = new ActionCategorizer($oldText , $newText);
-				$ac->printResult();
-				$ac->categorize();
-				
-				//Test visuel
-				//$wdf = new WikiDiffFormatter($oldText, $newText);
-				//echo $wdf->outputDiff();
-				//---
-				
-				
-				//Crée la premiere ligne de inserts.
-				$oldText = $newText;
-				$newEdit = new QuiEditQuiElem(1, $wikiRevs[0]["user"]);
+				$ac->printResult(); //Necessary to 
+				$ac->categorize();  //Track modifications.
+				$newEdit = new QuiEditQuiElem($EditId, $wikiRevs[0]["user"]);
 				$organizer->AddEdit($newEdit);
 				foreach ($ac->getSentenceEdits() as $edit){
 					$newEdit->LinesAdded++;
 				}
 				
-				//var_dump($newEdit);
-				
+				//Init the master array of tokens where all the modifications should be registered
+				$oldText = $newText;
 				$tokenMasterList = new MainTextArray($oldText);
-				//var_dump($tokenMasterList);
-				//var_dump($ac->getBasicEdits());
-				//var_dump($ac->getSentenceEdits());
-				//$be = $ac->getBasicEdits();
-				//var_dump($be->newTokens[0]);
-				//$currentEdit = new Edits($i, $wikiRevs[0]["user"]);
 				
-				//var_dump($mainText);
-				for($i = 1;$i < count($wikiRevs); $i++){
-					$currentEditId = $i + 1;
+				//Loop from the second revision to the last one.
+				for($i;$i < count($wikiRevs); $i++){
+					$currentEditId = $i + 1; //human id
+					//Tokenize the new revision and compare it with the previous revision (as $oldText).
 					$lexer = new WikiLexer($wikiRevs[$i]["*"]);
-					$newText = $lexer->getWikiTokens($wikiRevs[$i]["user"],$currentEditId);
-					
-					//Test visuel
-					 //$wdf = new WikiDiffFormatter($oldText, $newText);
-					 //echo $wdf->outputDiff();
-					//---
-					
+					$newText = $lexer->getWikiTokens($wikiRevs[$i]["user"],$currentEditId);	
 					$ac = new ActionCategorizer($oldText , $newText);
 					$ac->printResult();
 					$ac->categorize();
@@ -68,6 +57,8 @@
 					foreach($ac->getSentenceEdits() as $edit){
 						$newEdit = new QuiEditQuiElem($currentEditId, $wikiRevs[$i]["user"]);
 						
+						// Uses weha/diff/SentenceIns to detect a new sentence
+						// Get the token before to associate the edit to an existing one.
 						if($edit instanceof SentenceIns){
 							$newEdit->LinesAdded = 1;
 							$hashbefore = null;
@@ -81,20 +72,28 @@
 							}
 							
 							$organizer->addEdit($newEdit);
+							//Get the tokens to add to the master text
 							$tempInsArr = array_slice($newText, $edit->getNewPos() + 1, $edit->getNewLength());
-							$tokenMasterList->InsertTokens($tempInsArr, $hashbefore);
-							//var_dump($tokenMasterList->getArray());
+							//Register the modifications to the master text
+							$tokenMasterList->InsertTokens($tempInsArr, $hashbefore); 
 							
+							// Uses the Weha/diff/SentenceDel to detect sentence that has been removed.
+							// Uses the removed tokens to detect who has written this sentence.
 						} else if($edit instanceof SentenceDel){
 							
 							$newEdit->RelatedUser = $oldText[$edit->getOldPos()]->userName;
 							$newEdit->RelatedId = $oldText[$edit->getOldPos()]->editionId;
 							$newEdit->LinesRemoved = 1;
+							
+							
 							$firstHash = $oldText[$edit->getOldPos() + 1]->getHash();
-							$length = $edit->getOldLength() - $edit->getNewLength();
+							//To be enhance. Have to return the number of tokens to remove
+							$length = $edit->getOldLength() - $edit->getNewLength(); 
 							$organizer->addEdit($newEdit);
+							//Register the modification to the master text
 							$tokenMasterList->DeleteTokens($firstHash, $length);
 							
+							//This part is to be analysed. How to detect modificaitons.
 						} else {
 							$newEdit->RelatedUser = $oldText[$edit->getOldPos()]->userName;
 							$newEdit->RelatedId = $oldText[$edit->getOldPos()]->editionId;
@@ -102,10 +101,9 @@
 							//
 							$organizer->addEdit($newEdit);
 						}
-						//var_dump($edit);
 						
 					} //fin boucle edits
-					//var_dump($organizer->getEditList());
+					//Set the the master token list as the last modification.
 					$oldText = $tokenMasterList->getArray();
 				} //fin boucle revisions
 				
