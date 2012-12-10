@@ -24,31 +24,37 @@ Raphael.fn.pieChart = function (cx, cy, r, values, labels, stroke) {
             fill: "90-" + bcolor + "-" + color, 
             stroke: stroke, 
             "stroke-width": 1
-        }),
-        txt = paper.text(cx + (r + delta + 55) * Math.cos(-popangle * rad), cy + (r + delta + 25) * Math.sin(-popangle * rad), labels[j]).attr({
-            fill: bcolor, 
-            stroke: "none", 
-            opacity: 0, 
-            "font-size": 20
         });
-        p.mouseover(function () {
+        
+        $(".user"+j).mouseover(function () {
+            $(".user"+j).css("color", "#CCC");
             p.stop().animate({
                 transform: "s1.1 1.1 " + cx + " " + cy
             }, ms, "easein");
-            txt.stop().animate({
-                opacity: 1
-            }, ms, "easein");
+            
         }).mouseout(function () {
+            $(".user"+j).css("color", "#000");
             p.stop().animate({
                 transform: ""
             }, ms, "easein");
-            txt.stop().animate({
-                opacity: 0
-            }, ms);
+            
+        });
+        
+        p.mouseover(function () {
+            $(".user"+j).css("color", "#CCC");
+            p.stop().animate({
+                transform: "s1.1 1.1 " + cx + " " + cy
+            }, ms, "easein");
+            
+        }).mouseout(function () {
+            $(".user"+j).css("color", "#000");
+            p.stop().animate({
+                transform: ""
+            }, ms, "easein");
+            
         });
         angle += angleplus;
         chart.push(p);
-        chart.push(txt);
         start += .1;
     };
     for (var i = 0, ii = values.length; i < ii; i++) {
@@ -66,9 +72,9 @@ $(function () {
     $('#envoyer').click(function(){
         
         $.ajax({
-            url: "quiEdit.php"
+            url: "quiEdit.php?url="+$("#url").val()
         }).done(function ( data ) {
-            $("#content").html(data);
+            $("#result").html(data);
             var values = [],
     labels = [];
     $("tr").each(function () {
@@ -76,7 +82,7 @@ $(function () {
         labels.push($("th", this).text());
     });
     $("table").hide();
-            Raphael("holder", 620, 400).pieChart(310, 175, 130, values, labels, "#fff");
+            Raphael("holder", 620, 620).pieChart(310, 220, 200, values, labels, "#fff");
             $("#result").fadeIn(500);
         });
         

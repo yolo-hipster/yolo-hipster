@@ -22,7 +22,7 @@ header h1 {
 }
 
 input {
-    width:100%; 
+    width: 955px; 
 }
 section h1{
         padding-bottom: 10px;
@@ -35,6 +35,10 @@ section h2{
     width: 290px;
     padding: 5px 10px;  
     font-size: 1.3em;
+}
+
+#question h2 {
+    width: 940px;
 }
 
 nav {

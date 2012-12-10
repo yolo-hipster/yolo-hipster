@@ -2,11 +2,11 @@
 
 /*
   CE FICHIER A ETE BOUGE VERS yolo/contributions/main/qui_edit.php
-  Effectue une s�rie de tests.
+  Effectue une série de tests.
  */
 
 include("../classes/traitementRequetes/requeteur.class.php");
-ini_set('user_agent', 'ProjetWiki (https://github.com/yolo-hipster/yolo-hipster; rlamour2@yahoo.ca)'); //Requis pour �viter une erreur 403
+ini_set('user_agent', 'ProjetWiki (https://github.com/yolo-hipster/yolo-hipster; rlamour2@yahoo.ca)'); //Requis pour éviter une erreur 403
 $skipper = "<br>";
 
 function afficherUtilisateurs() {
@@ -47,17 +47,21 @@ function afficherUtilisateurs() {
 $unTableau = afficherUtilisateurs();
 $nb = count($unTableau[0]);
 
-echo '{';
-for ($i = 0; $i < $nb; $i++) {
+print '{"Edits" : [';
 
-    echo "{";
-    echo '"Id" :' . $nb . ",";
-    echo '"UserName":"' . $unTableau[0][$i] . '",';
-    echo '"Number":' . $unTableau[1][$i];
-    echo "}";
-    if ($i < $nb - 1) {
-        echo ",";
+$quantite = 0;
+for ($i = 0; $i < $nb; $i++) {
+    $quantite += $unTableau[1][$i];
+    print "{";
+    print '"Id" : "' . $i . '",';
+    print '"UserName" : "' . $unTableau[0][$i] . '",';
+    print '"Number": "' . $unTableau[1][$i]. '"';
+    print "}";
+    
+    
+    if ($i < ($nb - 1)) {
+        print ",";
     }
 }
-echo "}";
+print '], "Quantite" : '.$quantite.'}';
 ?>
