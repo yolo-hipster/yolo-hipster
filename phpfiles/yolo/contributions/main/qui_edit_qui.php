@@ -3,6 +3,7 @@
 	include_once("../utils/weha/categorizer/ActionCategorizerQuiEditQui.php");
 	ini_set('user_agent', 'ProjetWiki (https://github.com/yolo-hipster/yolo-hipster; rlamour2@yahoo.ca)');
 	
+	var_dump(QuiEditQui::QuiEditerTexteDeQui("en.wikipedia.org/wiki/Alfred_Poupart"));
 	
 	class QuiEditQui{
 	
@@ -20,7 +21,7 @@
 			//Get revisions from the article
 			$wikipage = ArticleWiki::createByURL($url);
 			$wikiRevs = Requeteur::getAllRevisions($wikipage);
-
+			
 			//Init class that manage the output
 			$organizer = new QuiEditQuiOutPutOrganizer();
 			
@@ -45,7 +46,7 @@
 				$tokenMasterList = new MainTextArray($oldText);
 				
 				//Loop from the second revision to the last one.
-				for($i;$i < count($wikiRevs); $i++){
+				for($i = 1;$i < count($wikiRevs); $i++){
 					$currentEditId = $i + 1; //human id
 					//Tokenize the new revision and compare it with the previous revision (as $oldText).
 					$lexer = new WikiLexer($wikiRevs[$i]["*"]);
@@ -114,6 +115,12 @@
 		}
 	}
 	
+	/*
+	 * Not working yet
+	 * Class that contains the main tokens repository 
+	 * You can merge content from other revisions by using
+	 * methods.
+	 */
 	class MainTextArray{
 		private $innerList;
 		
@@ -125,19 +132,20 @@
 			}
 		}
 		
+		/*
+		 * NotWorking
+		 * Will insert the $array after the hashcode specified.
+		 * If hashcode is null, will insert at index 0.
+		 */
 		public function InsertTokens($array, $hashbefore = null){
 			$list = $this->innerList;
 			$splitId = 0;
 			if($hashbefore != null){
 				$splitId = $this->findNode($hashbefore);
 			}
-			$splitId++; //for insert after the hash
 			
 			$firstPart = array_slice($list, 0, $splitId);
-			//var_dump($firstPart);
-			//var_dump($array);
 			$lastPart = array_slice($list, $splitId, count($list) - $splitId);
-			//var_dump($lastPart);
 			
 			$this->innerList = array_merge($firstPart, $array, $lastPart);
 		}
@@ -146,9 +154,6 @@
 			$list = $this->innerList;
 			reset($list);
 			$nodeIndex = 0;
-			//echo "CURRENT ITEM";
-			//echo $hashcode;
-			//var_dump(current($list));
 			while(current($list) != null && current($list)->getHash() != $hashcode){
 				next($list);
 				$nodeIndex++;
